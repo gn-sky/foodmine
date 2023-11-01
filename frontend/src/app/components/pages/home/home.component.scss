@@ -1,3 +1,5 @@
+@import 'src/styles.scss';
+
 ul {
   display: flex;
   justify-content: center;
@@ -16,7 +18,7 @@ li a {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  color: #e72929;
+  color: $border-red;
 }
 
 li a:hover {
