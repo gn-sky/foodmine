@@ -4,7 +4,7 @@ header {
   position: relative;
   background: white;
   padding: 0;
-  border: 1px solid $border-red;
+  border: 1px solid $red;
 }
 
 a {
@@ -12,7 +12,7 @@ a {
 }
 
 a:hover {
-  background: $border-red;
+  background: $red;
   color: white;
   cursor: pointer;
 }
