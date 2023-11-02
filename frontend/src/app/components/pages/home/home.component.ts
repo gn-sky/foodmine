@@ -20,6 +20,8 @@ export class HomeComponent implements OnDestroy {
     this.routeSubscription = activatedRoute.params.subscribe((params) => {
       if (params.searchTerm) {
         this.foods = this.foodService.getAllBySearchTerm(params.searchTerm);
+      } else if(params.tag) {
+          this.foods = this.foodService.getAllFoodsByTag(params.tag);
       } else {
         this.foods = foodService.getAll();
       }
