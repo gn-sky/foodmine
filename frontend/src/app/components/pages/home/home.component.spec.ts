@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SearchComponent } from '../../partials/search/search.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -9,8 +10,8 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [AppRoutingModule]
+      declarations: [HomeComponent, SearchComponent],
+      imports: [AppRoutingModule],
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
