@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartPageComponent } from './cart-page.component';
+import { TitleComponent } from '../../partials/title/title.component';
 
 describe('CartPageComponent', () => {
   let component: CartPageComponent;
@@ -8,7 +9,7 @@ describe('CartPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CartPageComponent]
+      declarations: [CartPageComponent, TitleComponent]
     });
     fixture = TestBed.createComponent(CartPageComponent);
     component = fixture.componentInstance;
