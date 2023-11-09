@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FoodPageComponent } from './food-page.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Food } from 'src/app/shared/models/food';
+import { NotFoundComponent } from '../../partials/not-found/not-found.component';
 
 describe('FoodPageComponent', () => {
   let component: FoodPageComponent;
@@ -11,7 +12,7 @@ describe('FoodPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FoodPageComponent],
+      declarations: [FoodPageComponent, NotFoundComponent],
       imports: [AppRoutingModule],
     });
     fixture = TestBed.createComponent(FoodPageComponent);

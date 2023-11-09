@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SearchComponent } from '../../partials/search/search.component';
 import { TagsComponent } from '../../partials/tags/tags.component';
+import { NotFoundComponent } from '../../partials/not-found/not-found.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,7 +12,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, SearchComponent, TagsComponent],
+      declarations: [HomeComponent, SearchComponent, TagsComponent, NotFoundComponent],
       imports: [AppRoutingModule],
     });
     fixture = TestBed.createComponent(HomeComponent);
