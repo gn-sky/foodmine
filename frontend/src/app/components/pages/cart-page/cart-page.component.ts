@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/shared/models/cart';
 import { CartItem } from 'src/app/shared/models/cart-item';
@@ -9,10 +9,23 @@ import { CartItem } from 'src/app/shared/models/cart-item';
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.scss'],
 })
-export class CartPageComponent {
-  cart$: Observable<Cart> = this.cartService.getCartObservable();
+export class CartPageComponent implements OnDestroy {
+  cart!: Cart;
+  cartSubscription: Subscription;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) {
+    this.cartSubscription = this.cartService
+      .getCartObservable()
+      .subscribe((cart) => {
+        this.cart = cart;
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
+  }
 
   removeFromCart(cartItem: CartItem) {
     this.cartService.removeFromCart(cartItem.food.id);
