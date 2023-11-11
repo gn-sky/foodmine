@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/shared/models/food';
 
@@ -9,37 +9,21 @@ import { Food } from 'src/app/shared/models/food';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnDestroy {
-  private routeSubscription: Subscription;
-  private foodSubscription!: Subscription;
-  foods: Food[] = [];
+export class HomeComponent {
+  foods$: Observable<Food[]> = this.activatedRoute.params.pipe(
+    switchMap((params) => {
+      if (params.searchTerm) {
+        return this.foodService.getAllBySearchTerm(params.searchTerm);
+      } else if (params.tag) {
+        return this.foodService.getAllFoodsByTag(params.tag);
+      } else {
+        return this.foodService.getAll();
+      }
+    })
+  );
 
   constructor(
     private foodService: FoodService,
-    activatedRoute: ActivatedRoute
-  ) {
-    let foodsObservable: Observable<Food[]>;
-    this.routeSubscription = activatedRoute.params.subscribe((params) => {
-      if (params.searchTerm) {
-        foodsObservable = this.foodService.getAllBySearchTerm(params.searchTerm);
-      } else if(params.tag) {
-        foodsObservable = this.foodService.getAllFoodsByTag(params.tag);
-      } else {
-        foodsObservable = foodService.getAll();
-      }
-
-      this.foodSubscription = foodsObservable.subscribe(serverFoods => {
-        this.foods = serverFoods;
-      })
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
-    if (this.foodSubscription) {
-      this.foodSubscription.unsubscribe();
-    }
-  }
+    private activatedRoute: ActivatedRoute
+  ) {}
 }
