@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FoodService } from 'src/app/services/food.service';
 import { Tag } from 'src/app/shared/models/tag';
 
@@ -8,19 +8,8 @@ import { Tag } from 'src/app/shared/models/tag';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss'],
 })
-export class TagsComponent implements OnDestroy {
-  private tagSubscription: Subscription;
-  tags?: Tag[];
+export class TagsComponent {
+  tags$: Observable<Tag[]> = this.foodService.getAllTags();
 
-  constructor(foodService: FoodService) {
-    this.tagSubscription = foodService.getAllTags().subscribe((serverTags) => {
-      this.tags = serverTags;
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.tagSubscription) {
-      this.tagSubscription.unsubscribe();
-    }
-  }
+  constructor(private foodService: FoodService) { }
 }
