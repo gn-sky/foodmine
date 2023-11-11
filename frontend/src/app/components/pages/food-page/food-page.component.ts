@@ -13,6 +13,7 @@ import { Food } from 'src/app/shared/models/food';
 export class FoodPageComponent implements OnDestroy {
   food!: Food;
   private routeSubscription: Subscription;
+  private foodSubscription!: Subscription;
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -22,7 +23,11 @@ export class FoodPageComponent implements OnDestroy {
   ) {
     this.routeSubscription = activatedRoute.params.subscribe((params) => {
       if (params.id) {
-        this.food = foodService.getById(params.id);
+        this.foodSubscription = foodService
+          .getById(params.id)
+          .subscribe((serverFood) => {
+            this.food = serverFood;
+          });
       }
     });
   }
@@ -35,6 +40,9 @@ export class FoodPageComponent implements OnDestroy {
   ngOnDestroy(): void {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
+    }
+    if (this.foodSubscription) {
+      this.foodSubscription.unsubscribe();
     }
   }
 }
