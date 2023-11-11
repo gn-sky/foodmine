@@ -18,7 +18,6 @@ describe('FoodPageComponent', () => {
     });
     fixture = TestBed.createComponent(FoodPageComponent);
     component = fixture.componentInstance;
-    component.food = food as Food;
     fixture.detectChanges();
   });
 
