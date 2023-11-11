@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/shared/models/food';
@@ -10,31 +10,20 @@ import { Food } from 'src/app/shared/models/food';
   templateUrl: './food-page.component.html',
   styleUrls: ['./food-page.component.scss'],
 })
-export class FoodPageComponent implements OnDestroy {
-  food!: Food;
-  private routeSubscription: Subscription;
+export class FoodPageComponent {
+  food$ = this.activatedRoute.params.pipe(
+    switchMap((params: any) => this.foodService.getById(params.id))
+  );
 
   constructor(
-    activatedRoute: ActivatedRoute,
-    foodService: FoodService,
+    private activatedRoute: ActivatedRoute,
+    private foodService: FoodService,
     private cartService: CartService,
     private router: Router
-  ) {
-    this.routeSubscription = activatedRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.food = foodService.getById(params.id);
-      }
-    });
-  }
+  ) {}
 
-  addToCart() {
-    this.cartService.addToCart(this.food);
+  addToCart(food: Food) {
+    this.cartService.addToCart(food);
     this.router.navigateByUrl('/cart-page');
-  }
-
-  ngOnDestroy(): void {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
   }
 }

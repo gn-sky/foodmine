@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FoodService } from 'src/app/services/food.service';
 import { Tag } from 'src/app/shared/models/tag';
 
@@ -8,9 +9,7 @@ import { Tag } from 'src/app/shared/models/tag';
   styleUrls: ['./tags.component.scss'],
 })
 export class TagsComponent {
-  tags?: Tag[];
+  tags$: Observable<Tag[]> = this.foodService.getAllTags();
 
-  constructor(foodService: FoodService) {
-    this.tags = foodService.getAllTags();
-  }
+  constructor(private foodService: FoodService) { }
 }

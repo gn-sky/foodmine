@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SearchComponent } from '../../partials/search/search.component';
 import { TagsComponent } from '../../partials/tags/tags.component';
 import { NotFoundComponent } from '../../partials/not-found/not-found.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,7 +14,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent, SearchComponent, TagsComponent, NotFoundComponent],
-      imports: [AppRoutingModule],
+      imports: [AppRoutingModule, HttpClientTestingModule],
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
