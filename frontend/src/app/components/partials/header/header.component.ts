@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +14,14 @@ export class HeaderComponent {
     .getCartObservable()
     .pipe(map((cart) => cart.totalNumber));
 
-  constructor(private cartService: CartService) {}
+  user$: Observable<User> = this.userService.userObservable;
+
+  constructor(
+    private cartService: CartService,
+    private userService: UserService
+  ) {}
+
+  logout() {
+    this.userService.logout();
+  }
 }
