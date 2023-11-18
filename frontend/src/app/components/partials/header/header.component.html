@@ -2,21 +2,26 @@
   <div class="container">
     <a routerLink="/" class="logo">Food Mine</a>
     <nav>
-      <ul>
-        <li>
-          <a routerLink="/login">Login</a>
-        </li>
-        <li class="menu-container">
-          <a routerLink="/dashboard">Eugene</a>
+      <ul *ngIf="user$ | async as user">
+        <li *ngIf="user.token; else anonymous" class="menu-container">
+          <a routerLink="/dashboard">{{ user.name }}</a>
           <div class="menu">
             <a routerLink="/profile">Profile</a>
             <a routerLink="/orders">Orders</a>
-            <a>Logout</a>
+            <a (click)="logout()">Logout</a>
           </div>
         </li>
+        <ng-template #anonymous>
+          <li *ngIf="!user.token">
+            <a routerLink="/login">Login</a>
+          </li>
+        </ng-template>
         <li>
           <a routerLink="cart-page">
-            Cart <span *ngIf="cartQuantity$ | async as cartQuantity">{{ cartQuantity }}</span>
+            Cart
+            <span *ngIf="cartQuantity$ | async as cartQuantity">{{
+              cartQuantity
+            }}</span>
           </a>
         </li>
       </ul>
