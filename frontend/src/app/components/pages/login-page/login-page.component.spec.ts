@@ -14,6 +14,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { InputContainerComponent } from '../../partials/input-container/input-container.component';
+import { InputValidationComponent } from '../../partials/input-validation/input-validation.component';
+import { TextInputComponent } from '../../partials/text-input/text-input.component';
+import { DefaultButtonComponent } from '../../partials/default-button/default-button.component';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -22,12 +26,19 @@ describe('LoginPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginPageComponent, TitleComponent],
+      declarations: [
+        LoginPageComponent,
+        TitleComponent,
+        InputContainerComponent,
+        InputValidationComponent,
+        TextInputComponent,
+        DefaultButtonComponent
+      ],
       imports: [
         ReactiveFormsModule,
         HttpClientTestingModule,
         ToastrModule.forRoot(),
-        AppRoutingModule
+        AppRoutingModule,
       ],
       providers: [UserService],
     });
