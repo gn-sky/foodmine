@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/partials/header/header.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule } from 'ngx-toastr';
+import { LoadingComponent } from './components/partials/loading/loading.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -12,7 +13,8 @@ describe('AppComponent', () => {
     declarations: [
       AppComponent,
       HeaderComponent,
-      HomeComponent
+      HomeComponent,
+      LoadingComponent
     ]
   }));
 
