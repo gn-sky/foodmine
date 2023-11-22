@@ -4,16 +4,11 @@
     margin-top: 3rem;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.details{
+    width: 25rem;
 }
 
-.register {
+.login {
     display: flex;
     justify-content: center;
-}
-
-.details {
-    width: 25rem;
 }
