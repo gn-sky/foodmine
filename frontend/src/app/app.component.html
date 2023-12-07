@@ -1,9 +1,7 @@
 <app-loading></app-loading>
 
-<app-header></app-header>
+<app-header [title]="title"></app-header>
 
 <div class="content" role="main">
-    <span class="info">{{ title }} app is running!</span>
+    <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,6 +10,8 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  @Input() title = '';
+
   cartQuantity$: Observable<number> = this.cartService
     .getCartObservable()
     .pipe(map((cart) => cart.totalNumber));
