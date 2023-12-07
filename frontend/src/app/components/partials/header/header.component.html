@@ -1,9 +1,9 @@
 <header>
   <div class="container">
-    <a routerLink="/" class="logo">Food Mine</a>
+    <a routerLink="/" class="logo">{{ title }}</a>
     <nav>
       <ul *ngIf="user$ | async as user">
-        <li *ngIf="user.token; else anonymous" class="menu-container">
+        <li *ngIf="user.name; else anonymous" class="menu-container">
           <a routerLink="/dashboard">{{ user.name }}</a>
           <div class="menu">
             <a routerLink="/profile">Profile</a>

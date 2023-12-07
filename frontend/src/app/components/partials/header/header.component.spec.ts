@@ -28,4 +28,12 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render logo text', () => {
+    const mockTitle = 'ABC';
+    component.title = mockTitle;
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('a.logo')?.textContent).toContain(mockTitle);
+  });  
 });
